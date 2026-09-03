@@ -1,0 +1,29 @@
+bundle:
+  name: globalmart
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog:
+    description: Unity Catalog catalog for the environment
+    default: retail_dev
+
+targets:
+  dev:
+    mode: development
+    default: true
+    variables:
+      catalog: retail_dev
+
+  staging:
+    mode: development
+    variables:
+      catalog: retail_staging
+
+  prod:
+    mode: production
+    workspace:
+      root_path: /Workspace/Users/sanketazure19@gmail.com/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: retail_prod

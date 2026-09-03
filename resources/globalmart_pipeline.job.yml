@@ -1,0 +1,94 @@
+resources:
+  jobs:
+    globalmart_pipeline:
+      name: globalmart-pipeline-${bundle.target}
+
+      schedule:
+        quartz_cron_expression: "0 0 2 * * ?"
+        timezone_id: "Asia/Kolkata"
+        pause_status: PAUSED
+
+      tasks:
+
+        - task_key: silver_customers
+          notebook_task:
+            notebook_path: ../src/notebooks/10_silver_customers.py
+            base_parameters:
+              env: ${bundle.target}
+          environment_key: default
+
+        - task_key: silver_products
+          notebook_task:
+            notebook_path: ../src/notebooks/11_silver_products.py
+            base_parameters:
+              env: ${bundle.target}
+          environment_key: default
+
+        - task_key: silver_orders
+          notebook_task:
+            notebook_path: ../src/notebooks/12_silver_orders.py
+            base_parameters:
+              env: ${bundle.target}
+          environment_key: default
+
+        - task_key: silver_clickstream
+          notebook_task:
+            notebook_path: ../src/notebooks/13_silver_clickstream.py
+            base_parameters:
+              env: ${bundle.target}
+          environment_key: default
+
+        - task_key: silver_promotions_returns
+          notebook_task:
+            notebook_path: ../src/notebooks/15_silver_promotions_returns.py
+            base_parameters:
+              env: ${bundle.target}
+          environment_key: default
+
+        - task_key: gold_sales_summary
+          depends_on:
+            - task_key: silver_orders
+            - task_key: silver_products
+          notebook_task:
+            notebook_path: ../src/notebooks/16_gold_sales_summary.py
+            base_parameters:
+              env: ${bundle.target}
+          environment_key: default
+
+        - task_key: gold_customer_360
+          depends_on:
+            - task_key: silver_customers
+            - task_key: silver_orders
+            - task_key: silver_clickstream
+            - task_key: silver_promotions_returns
+          notebook_task:
+            notebook_path: ../src/notebooks/17_gold_customer_360.py
+            base_parameters:
+              env: ${bundle.target}
+          environment_key: default
+
+        - task_key: gold_product_performance
+          depends_on:
+            - task_key: silver_orders
+            - task_key: silver_products
+          notebook_task:
+            notebook_path: ../src/notebooks/18_gold_product_performance.py
+            base_parameters:
+              env: ${bundle.target}
+          environment_key: default
+
+        - task_key: gold_data_quality
+          depends_on:
+            - task_key: gold_sales_summary
+            - task_key: gold_customer_360
+            - task_key: gold_product_performance
+          notebook_task:
+            notebook_path: ../src/notebooks/19_gold_data_quality.py
+            base_parameters:
+              env: ${bundle.target}
+          environment_key: default
+
+      environments:
+        - environment_key: default
+          spec:
+            client: "1"
