@@ -69,3 +69,4 @@ with this project. It's also possible to interact with it directly using the CLI
    $ uv run pytest
    ```
 GlobalMart Azure Databricks Lakehouse Project
+CI/CD deployment test
