@@ -1,0 +1,22 @@
+resources:
+  jobs:
+    globalmart_monitoring:
+      name: globalmart-monitoring-${bundle.target}
+
+      schedule:
+        quartz_cron_expression: "0 */10 * * * ?"
+        timezone_id: "Asia/Kolkata"
+        pause_status: PAUSED
+
+      tasks:
+        - task_key: job_monitoring
+          notebook_task:
+            notebook_path: ../src/notebooks/20_job_monitoring.py
+            base_parameters:
+              env: ${bundle.target}
+          environment_key: default
+
+      environments:
+        - environment_key: default
+          spec:
+            client: "1"
