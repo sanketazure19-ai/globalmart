@@ -25,10 +25,5 @@ targets:
     mode: production
     workspace:
       root_path: /Workspace/Users/sanketazure19@gmail.com/.bundle/${bundle.name}/${bundle.target}
-    permissions:
-      - user_name: sanketazure19@gmail.com
-        level: CAN_MANAGE
-      - service_principal_name: fb03db3f-8267-4a80-838d-3d864e6c1da4
-        level: CAN_MANAGE
     variables:
       catalog: retail_prod
