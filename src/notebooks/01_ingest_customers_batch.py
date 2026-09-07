@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "5"
+# ///
 # ============================================================
 # Environment Configuration
 # ============================================================
@@ -25,7 +29,7 @@ print("Catalog:", CATALOG)
 # COMMAND ----------
 
 # Source: Unity Catalog external volume
-SOURCE_PATH = "/Volumes/{CATALOG}/landing/raw_files/customers"
+SOURCE_PATH = f"/Volumes/{CATALOG}/landing/raw_files/customers"
 
 # Target: Unity Catalog Bronze table
 TARGET_TABLE = f"{CATALOG}.bronze.customers"

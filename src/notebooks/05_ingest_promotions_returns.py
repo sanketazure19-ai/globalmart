@@ -26,7 +26,7 @@ print("Catalog:", CATALOG)
 
 from pyspark.sql import functions as F
 
-BASE_PATH = "/Volumes/{CATALOG}/landing/raw_files"
+BASE_PATH = f"/Volumes/{CATALOG}/landing/raw_files"
 
 PROMOTIONS_SOURCE = f"{BASE_PATH}/promotions"
 RETURNS_SOURCE = f"{BASE_PATH}/returns"
