@@ -39,6 +39,7 @@ print(f"Target : {TARGET_TABLE}")
 
 # COMMAND ----------
 
+from pyspark.sql import functions as F
 customers_df = (
     spark.read
          .format("csv")
