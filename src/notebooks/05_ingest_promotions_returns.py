@@ -26,7 +26,11 @@ print("Catalog:", CATALOG)
 
 from pyspark.sql import functions as F
 
-BASE_PATH = f"/Volumes/{CATALOG}/landing/raw_files"
+BASE_PATH = (
+    "abfss://raw@"
+    "dataloadadlsproject.dfs.core.windows.net/"
+    f"{ENV}"
+)
 
 PROMOTIONS_SOURCE = f"{BASE_PATH}/promotions"
 RETURNS_SOURCE = f"{BASE_PATH}/returns"

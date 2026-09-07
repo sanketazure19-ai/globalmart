@@ -26,7 +26,11 @@ print("Catalog:", CATALOG)
 
 from pyspark.sql import functions as F
 
-SOURCE_PATH = f"/Volumes/{CATALOG}/landing/raw_files/clickstream"
+SOURCE_PATH = (
+    "abfss://raw@"
+    "dataloadadlsproject.dfs.core.windows.net/"
+    f"{ENV}/clickstream"
+)
 
 TARGET_TABLE = f"{CATALOG}.bronze.clickstream_events"
 

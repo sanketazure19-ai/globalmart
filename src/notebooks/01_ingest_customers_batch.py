@@ -29,7 +29,11 @@ print("Catalog:", CATALOG)
 # COMMAND ----------
 
 # Source: Unity Catalog external volume
-SOURCE_PATH = f"/Volumes/{CATALOG}/landing/raw_files/customers"
+SOURCE_PATH = (
+    "abfss://raw@"
+    "dataloadadlsproject.dfs.core.windows.net/"
+    f"{ENV}/customers"
+)
 
 # Target: Unity Catalog Bronze table
 TARGET_TABLE = f"{CATALOG}.bronze.customers"
@@ -51,10 +55,6 @@ customers_df = (
              F.col("_metadata.file_path").alias("_source_file")
          )
 )
-
-# COMMAND ----------
-
-display(customers_df)
 
 # COMMAND ----------
 
