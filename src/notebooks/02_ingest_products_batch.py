@@ -24,7 +24,7 @@ print("Catalog:", CATALOG)
 
 # COMMAND ----------
 
-SOURCE_PATH = "/Volumes/{CATALOG}/landing/raw_files/products"
+SOURCE_PATH = f"/Volumes/{CATALOG}/landing/raw_files/products"
 
 TARGET_TABLE = f"{CATALOG}.bronze.products"
 
