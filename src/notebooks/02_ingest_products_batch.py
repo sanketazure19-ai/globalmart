@@ -1,4 +1,29 @@
 # Databricks notebook source
+# ============================================================
+# Environment Configuration
+# ============================================================
+
+dbutils.widgets.dropdown(
+    "env",
+    "dev",
+    ["dev", "staging", "prod"]
+)
+
+ENV = dbutils.widgets.get("env")
+
+CATALOG_MAP = {
+    "dev": "retail_dev",
+    "staging": "retail_staging",
+    "prod": "retail_prod"
+}
+
+CATALOG = CATALOG_MAP[ENV]
+
+print("Environment:", ENV)
+print("Catalog:", CATALOG)
+
+# COMMAND ----------
+
 SOURCE_PATH = "/Volumes/{CATALOG}/landing/raw_files/products"
 
 TARGET_TABLE = f"{CATALOG}.bronze.products"
